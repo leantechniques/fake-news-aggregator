@@ -5,10 +5,13 @@ jest.mock('./services/tweets-service');
 const mockGetTweets = getTweets as jest.MockedFunction<typeof getTweets>;
 
 it('Should render a tweet', async () => {
-  const tweet = "This is a tweet";
-  mockGetTweets.mockResolvedValue({id: 1, tweet: tweet, author: "Nate Johnson"})
-  render(<App />);
-  const tweetText = await screen.findByText(tweet);
-  expect(tweetText).toBeInTheDocument();
+    const tweet = 'This is a tweet';
+    mockGetTweets.mockResolvedValue({
+        id: 1,
+        tweet: tweet,
+        author: 'Nate Johnson',
+    });
+    render(<App />);
+    const tweetText = await screen.findByText(tweet);
+    expect(tweetText).toBeInTheDocument();
 });
-

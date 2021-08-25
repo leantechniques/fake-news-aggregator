@@ -3,21 +3,16 @@ import './App.css';
 import { getTweets, Tweet } from './services/tweets-service';
 
 function App() {
+    const [tweets, setTweets] = useState<Tweet | undefined>();
 
-  const [tweets, setTweets] = useState<Tweet|undefined>();
+    useEffect(() => {
+        async function fetchTweets() {
+            setTweets(await getTweets());
+        }
+        fetchTweets();
+    }, [setTweets]);
 
-  useEffect(() => {
-    async function fetchTweets(){
-      setTweets(await getTweets());
-    }
-    fetchTweets();
-  }, [setTweets]);
-
-  return (
-    <div className="App">
-      {tweets?.tweet}
-    </div>
-  );
+    return <div className="App">{tweets?.tweet}</div>;
 }
 
 export default App;
